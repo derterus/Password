@@ -6,48 +6,16 @@
     <h1 class="display-4">Придумай пароль!</h1>
     <br />
     <form>
-        <div class="form-group">
-            <input type="text" class="form-control" id="Password" placeholder="Введите свой пароль сюда">
+        <div id="app">
+                <input type="text" v-model="password" placeholder="Введите свой пароль сюда">
+            <div v-for="rule in rulesStatus" >
+                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.rule==1 "><span class="text-success">Ваш пароль должен иметь по крайней мере 5 символов</span></p>
+                <p v-else-if="rule.rule==1" ><span class="text-danger">Ваш пароль должен иметь по крайней мере 5 символов</span></p>
+
+            </div>
+            <div>{{password}}</div>
         </div>
-        <p id="rule1"></p>
-        <p id="rule2"></p>
-        <p id="rule3"></p>
-        <p id="rule4"></p>
     </form>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#Password').on('input', function () {
-            var password = $(this).val();
-            checkRules(password);
-        });
-    });
-
-    function checkRules(password) {
-        if (password.length <= 5) {
-            $('#rule1').html('<span class="text-danger">Ваш пароль должен иметь по крайней мере 5 символов</span>');
-        } else {
-            $('#rule1').html('<span class="text-success">Ваш пароль больше 5 символов ✓</span>');
-        }
-        
-        if (!/\d/.test(password)) {
-            $('#rule2').html('<span class="text-danger">Ваш пароль должен иметь хотя бы 1 цифру</span>');
-        } else {
-            $('#rule2').html('<span class="text-success">Ваш пароль имеет хотя бы 1 цифру ✓</span>');
-        }
-
-        if (!/[А-Я]/.test(password)) {
-            $('#rule3').html('<span class="text-danger">Ваш пароль должен иметь хотя бы 1 заглавную букву</span>');
-        } else {
-            $('#rule3').html('<span class="text-success">Ваш пароль имеет хотя бы 1 заглавную букву ✓</span>');
-        }
-
-        if (!/[!#$%^&*]/.test(password)) {
-            $('#rule4').html('<span class="text-danger">Ваш пароль должен иметь хотя бы 1 специальный символ</span>');
-        } else {
-            $('#rule4').html('<span class="text-success">Ваш пароль имеет хотя бы 1 специальный символ ✓</span>');
-        }
-    }
-</script>

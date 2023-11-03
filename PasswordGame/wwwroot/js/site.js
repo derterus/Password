@@ -5,13 +5,19 @@
 var app = new Vue({
     el: '#app',
     data: {
-        password:"",
+        index: 2,
+        password: "",
         rulesStatus: [
-            { rule: 1, statusNow: false, statusComplete: false },
-            { rule: 2, statusNow: false, statusComplete: false }
+            { id: 1, statusNow: false, statusComplete: false, text: "Ваш пароль должен иметь по крайней мере 5 символов"},
+            { id: 2, statusNow: false, statusComplete: false, text: "Ваш пароль должен иметь по крайней мере 1 цифру" }
 
-        
-        
+
+
         ]
+    },
+    computed:{
+        checkedPassword: function (rule) {
+            rule.text="123123123"
+        }
     }
 })

@@ -8,10 +8,19 @@
     <form>
         <div id="app">
                 <input type="text" v-model="password" placeholder="Введите свой пароль сюда">
-            <div v-for="rule in rulesStatus" >
-                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.rule==1 "><span class="text-success">Ваш пароль должен иметь по крайней мере 5 символов</span></p>
-                <p v-else-if="rule.rule==1" ><span class="text-danger">Ваш пароль должен иметь по крайней мере 5 символов</span></p>
+            <div v-for="rule in rulesStatus">
+                {{checkPassword}}
+            </div>
 
+            <div v-for="rule in rulesStatus" >
+                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.id==1 "><span class="text-success" style=" background-color:greenyellow">{{rule.text}}</span></p>
+                <p v-else-if="rule.id==1 & rule.statusComplete==true"><span class="text-danger" style=" background-color:red">{{rule.text}}</span></p>
+                <p v-else-if="rule.id==1 & rule.statusComplete==false & index==rule.id"><span class="text-danger" style=" background-color:lightgoldenrodyellow">{{rule.text}}</span></p>
+
+
+                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.id==2 "><span class="text-success">{{rule.text}}</span></p>
+                <p v-else-if="rule.id==2 & rule.statusComplete==true "><span class="text-danger">{{rule.text}}</span></p>
+                <p v-else-if="rule.id==2 & rule.statusComplete==false & index==rule.id"><span class="text-danger" style=" background-color:lightgoldenrodyellow">{{rule.text}}</span></p>
             </div>
             <div>{{password}}</div>
         </div>

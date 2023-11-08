@@ -13,7 +13,10 @@
                 <span v-bind:class="{'text-success': rule.statusNow==true , 'text-danger': rule.statusNow==false }"> {{rule.text}}</span>
             </div>
             <div v-for="rule in filterRules">
-                 <span v-bind:class="{'text-success': rule.statusNow==true , 'text-danger': rule.statusNow==false }"> {{rule.text}}</span>
+                <span v-if="rule.statusNow===false" v-bind:class="{'text-danger': rule.statusNow==false }">{{rule.text}}</span>
+            </div>
+            <div v-for="rule in filterRules.slice().reverse()">
+                 <span v-if="rule.statusNow===true" v-bind:class="{'text-success': rule.statusNow==true }"> {{rule.id}}. {{rule.text}}</span>
             </div>
             <div>{{password}} </div>
             <div>Индекс {{index}}</div>

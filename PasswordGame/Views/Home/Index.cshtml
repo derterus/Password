@@ -7,22 +7,16 @@
     <br />
     <form>
         <div id="app">
-                <input type="text" v-model="password" placeholder="Введите свой пароль сюда">
-            <div v-for="rule in rulesStatus">
-                {{checkPassword}}
+            <input type="text" v-model="password" placeholder="Введите свой пароль сюда" v-on:keyup="checkedPassword()">
+
+            <div v-for="rule in filterIndex">
+                <span v-bind:class="{'text-success': rule.statusNow==true , 'text-danger': rule.statusNow==false }"> {{rule.text}}</span>
             </div>
-
-            <div v-for="rule in rulesStatus" >
-                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.id==1 "><span class="text-success" style=" background-color:greenyellow">{{rule.text}}</span></p>
-                <p v-else-if="rule.id==1 & rule.statusComplete==true"><span class="text-danger" style=" background-color:red">{{rule.text}}</span></p>
-                <p v-else-if="rule.id==1 & rule.statusComplete==false & index==rule.id"><span class="text-danger" style=" background-color:lightgoldenrodyellow">{{rule.text}}</span></p>
-
-
-                <p v-if="rule.statusNow==true & rule.statusComplete==true & rule.id==2 "><span class="text-success">{{rule.text}}</span></p>
-                <p v-else-if="rule.id==2 & rule.statusComplete==true "><span class="text-danger">{{rule.text}}</span></p>
-                <p v-else-if="rule.id==2 & rule.statusComplete==false & index==rule.id"><span class="text-danger" style=" background-color:lightgoldenrodyellow">{{rule.text}}</span></p>
+            <div v-for="rule in filterRules">
+                 <span v-bind:class="{'text-success': rule.statusNow==true , 'text-danger': rule.statusNow==false }"> {{rule.text}}</span>
             </div>
-            <div>{{password}}</div>
+            <div>{{password}} </div>
+            <div>Индекс {{index}}  {{hash}}</div>
         </div>
     </form>
 </div>
